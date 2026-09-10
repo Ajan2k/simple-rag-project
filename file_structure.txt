@@ -1,0 +1,26 @@
+rag_api_project/
+├── app/
+│   ├── __init__.py
+│   ├── main.py                 # App factory and lifespan manager (loads ML assets)
+│   ├── core/                   # Cross-cutting concerns
+│   │   ├── config.py           # Pydantic BaseSettings (environment variables)
+│   │   └── dependencies.py     # DI for DB sessions and injecting ML models
+│   ├── api/                    # Thin routing layer
+│   │   └── routers/            
+│   │       ├── chat.py         # WebSocket and HTTP streaming endpoints
+│   │       └── health.py       # Container readiness and liveness probes
+│   ├── services/               # Core business logic
+│   │   ├── rag_engine.py       # Orchestrates FAISS retrieval + LLM prompt injection
+│   │   └── history.py          # Background operations for conversation persistence
+│   ├── ml/                     # Machine Learning logic
+│   │   ├── vector_store.py     # FAISS index initialization and querying
+│   │   └── embeddings.py       # Local embedding model execution
+│   ├── schemas/                # Pydantic v2 models (Request/Response definitions)
+│   │   └── payload.py          
+│   └── models/                 # SQLAlchemy ORM database models
+│       └── chat_log.py         
+├── tests/                      # Pytest suite
+├── .env                        # Local environment variables (git-ignored)
+├── Dockerfile                  # Application container blueprint
+├── docker-compose.yml          # Multi-container orchestration (App, MySQL, Redis)
+└── requirements.txt
