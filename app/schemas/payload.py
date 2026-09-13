@@ -44,7 +44,7 @@ class SourceChunk(Base):
     metadata : dict[str, str] = Field(default_factory=dict)
 
 class ChatResponse(Base):
-    coversation_id : UUID = Field(default_factory=uuid4)
+    conversation_id : UUID = Field(default_factory=uuid4)
     answer : str
     sources : list[SourceChunk] = Field(default_factory=list)
     created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))

@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 
-from schemas.payload import ChatRequest, ChatResponse ,SourceChunk
+from app.schemas.payload import ChatRequest, ChatResponse ,SourceChunk
 
-router = APIRouter(prefix="chat/",tags=["chat"])
+router = APIRouter(prefix="/chat",tags=["chat"])
 
 @router.post("",response_model=ChatResponse)
 async def chat(payload: ChatRequest) -> ChatResponse:

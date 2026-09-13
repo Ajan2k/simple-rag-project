@@ -68,7 +68,7 @@ class ChatLog(Base):
             "uq_chat_logs_conv_turn",
             "conversation_id",
             "turn_index",
-            Unique=True,
+            unique=True,
         ),
         Index("ix_chat_logs_created_at", text("created_at DESC")),
         Index(
