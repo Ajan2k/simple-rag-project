@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     version: str = Field(default="1.0.0", pattern=r"^\d+\.\d+\.\d+$")
     debug: bool = Field(default=False)
 
-    groq_api_key: SecretStr = Field(...,min_length=60)
+    groq_api_key: SecretStr = Field(...,max_length=60)
     gemini_api_key: SecretStr | None = Field(default=None)
 
     postgres_uri: PostgresDsn = Field(default="postgresql+asyncpg://postgres:password@localhost:5432/rag_db" ,alias="DATABASE_URL")

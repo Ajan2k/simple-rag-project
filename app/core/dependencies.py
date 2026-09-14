@@ -3,7 +3,9 @@ from typing import Annotated
 from fastapi import Depends, Request, HTTPException, status
 
 from app.core.config import settings, Settings
+from app.core.db import get_db_session
 
+from sqlalchemy.ext.asyncio import AsyncSession
 def get_settings() -> Settings :
     return settings
 
@@ -26,3 +28,4 @@ def get_embedder(request: Request):
 SettingDep = Annotated[Settings,Depends(get_settings)]
 VectorDep = Annotated[object , Depends(get_vector_store)]
 EmbedderDep = Annotated[object, Depends(get_embedder)]
+DbSession = Annotated(AsyncSession,Depends(get_db_session))

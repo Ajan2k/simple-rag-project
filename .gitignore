@@ -12,3 +12,6 @@ wheels/
 file_structure.txt
 .env
 
+
+#experiments
+playground/

@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from app.core.config import settings
+from app.core.db import init_models,dispose_engine
 from app.api.routers import health,chat
 
 
@@ -11,9 +12,11 @@ async def lifespan(app: FastAPI):
 
     app.state.embedder = None
     app.state.vector_index  = None
+    await init_models()
     yield
     app.state.embedder = None
     app.state.vector_index  = None
+    await dispose_engine()
 
 def create_app() -> FastAPI :
     app = FastAPI(
