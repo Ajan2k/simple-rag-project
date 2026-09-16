@@ -28,4 +28,4 @@ def get_embedder(request: Request):
 SettingDep = Annotated[Settings,Depends(get_settings)]
 VectorDep = Annotated[object , Depends(get_vector_store)]
 EmbedderDep = Annotated[object, Depends(get_embedder)]
-DbSession = Annotated(AsyncSession,Depends(get_db_session))
+DbSession = Annotated[AsyncSession,Depends(get_db_session)]

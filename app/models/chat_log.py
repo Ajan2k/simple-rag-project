@@ -84,5 +84,5 @@ class ChatLog(Base):
     def __repr__(self):
         return (
             f"<ChatLog id={self.id} conv={self.conversation_id}"
-            f"turn={self.turn_index} status=e{self.status}"
+            f"turn={self.turn_index} status={self.status}"
         )
