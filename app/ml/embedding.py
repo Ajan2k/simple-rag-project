@@ -6,7 +6,7 @@ from sentence_transformers import SentenceTransformer
 from app.core.config import settings
 
 
-_model : SentenceTransformer | None
+_model : SentenceTransformer | None = None
 
 def get_embedding_model() -> SentenceTransformer:
     global _model
@@ -17,9 +17,12 @@ def get_embedding_model() -> SentenceTransformer:
         )
     return _model
 
+async def preload_embedding_model() -> SentenceTransformer :
+    return await asyncio.to_thread(get_embedding_model)
+
 async def encode_text(texts:Sequence[str]) -> list[list[float]]:
     model = get_embedding_model()
-    result = asyncio.to_thread(
+    result =await asyncio.to_thread(
         model.encode,
         list(texts),
         normalize_embeddings=True,
@@ -30,5 +33,5 @@ async def encode_text(texts:Sequence[str]) -> list[list[float]]:
     return result.astype(float).tolist()
 
 async def encode_prompt(prompt:str) ->  list[float]:
-    vectors = encode_text(prompt)
+    vectors =await encode_text(prompt)
     return vectors[0] if vectors else []
